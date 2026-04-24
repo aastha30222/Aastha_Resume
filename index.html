@@ -5,70 +5,81 @@
 
   <style>
     body {
-      font-family: 'Segoe UI', Arial;
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
       background: #f7f9fc;
+      padding: 40px;
     }
 
-    h1 {
+    .container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .avatar {
+      font-size: 90px;
+      background: white;
+      padding: 20px;
+      border-radius: 50%;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .content h1 {
       margin-bottom: 5px;
     }
 
-    .subtitle {
+    .content p {
       color: #555;
       margin-bottom: 20px;
     }
 
-    h2 {
-      cursor: pointer;
+    .timeline {
+      position: relative;
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .progress-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      background: #4285f4;
+      transition: width 0.5s ease;
+      z-index: 0;
+    }
+
+    .step {
+      position: relative;
+      padding: 10px 15px;
       background: #e8f0fe;
-      padding: 10px;
-      border-radius: 5px;
+      border-radius: 20px;
+      cursor: pointer;
+      z-index: 1;
+      transition: 0.3s;
     }
 
-    .section {
-      margin-bottom: 15px;
-    }
-
-    .content {
-      display: none;
-      padding: 10px;
-      animation: fadeIn 0.4s ease-in-out;
-    }
-
-    .card {
-      border-radius: 8px;
-      padding: 15px;
-      margin: 10px 0;
-      background: white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
-    }
-
-    ul {
-      margin-top: 5px;
-    }
-
-    .skills span {
-      display: inline-block;
-      background: #d2e3fc;
-      padding: 6px 10px;
-      margin: 5px;
-      border-radius: 15px;
-      font-size: 14px;
-      transition: background 0.3s;
-    }
-
-    .skills span:hover {
+    .step:hover {
       background: #4285f4;
       color: white;
+    }
+
+    .description {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .metrics {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #4285f4;
     }
 
     @keyframes fadeIn {
@@ -77,68 +88,66 @@
     }
   </style>
 
-  <script>
-    function toggleSection(id) {
-      let content = document.getElementById(id);
-      content.style.display = content.style.display === "block" ? "none" : "block";
-    }
-  </script>
-
 </head>
 
 <body>
 
-<h1>Aastha Mishra</h1>
-<p class="subtitle">Manager II, Process Engineer | AI-driven Operations</p>
+<div class="container">
 
-<div class="section">
-  <h2 onclick="toggleSection('about')">About ⬇</h2>
-  <div class="content" id="about">
-    <p>Industrial Engineer with 5+ years of experience optimizing supply chain operations using data, automation, and AI-driven decision-making.</p>
-  </div>
-</div>
+  <!-- Avatar -->
+  <div class="avatar">👩‍🎓</div>
 
-<div class="section">
-  <h2 onclick="toggleSection('experience')">Experience ⬇</h2>
-  <div class="content" id="experience">
+  <!-- Content -->
+  <div class="content">
+    <h1>Aastha Mishra</h1>
+    <p>Industrial Engineer | AI-Driven Operations</p>
 
-    <div class="card">
-      <b>Walmart – Process Engineer</b>
-      <ul>
-        <li>Built AI-powered workflow solutions</li>
-        <li>Improved throughput by +42 cases/hour</li>
-        <li>Reduced labor cost by $36K/month</li>
-      </ul>
+    <div class="timeline">
+      <div class="progress-line" id="progress"></div>
+
+      <div class="step" onclick="showStage(0)">🎓 Start</div>
+      <div class="step" onclick="showStage(1)">⚙️ Growth</div>
+      <div class="step" onclick="showStage(2)">📈 Impact</div>
+      <div class="step" onclick="showStage(3)">🤖 AI</div>
     </div>
 
-    <div class="card">
-      <b>Future Supply Chain – Lead Engineer</b>
-      <ul>
-        <li>Improved productivity to 97%</li>
-        <li>Saved $13,600 annually</li>
-      </ul>
+    <div id="desc" class="description">
+      Click a stage to explore the journey.
     </div>
-
   </div>
+
 </div>
 
-<div class="section">
-  <h2 onclick="toggleSection('skills')">Skills ⬇</h2>
-  <div class="content skills" id="skills">
-    <span>Power BI</span>
-    <span>Python</span>
-    <span>SQL</span>
-    <span>AI</span>
-    <span>Process Improvement</span>
-  </div>
-</div>
+<script>
+const stages = [
+  {
+    text: "Built a strong foundation in industrial engineering and process thinking.",
+    metric: ""
+  },
+  {
+    text: "Started optimizing workflows and improving operational efficiency across operations.",
+    metric: ""
+  },
+  {
+    text: "Led process improvements delivering measurable cost savings and throughput gains.",
+    metric: "+42 cases/hour | $36K/month saved"
+  },
+  {
+    text: "Currently building AI-driven solutions to scale operations and enable smarter decision-making.",
+    metric: "AI + Data-driven optimization"
+  }
+];
 
-<div class="section">
-  <h2 onclick="toggleSection('contact')">Contact ⬇</h2>
-  <div class="content" id="contact">
-    <p>Email: aasthamishra3022@gmail.com</p>
-  </div>
-</div>
+function showStage(index) {
+  const desc = document.getElementById("desc");
+  const progress = document.getElementById("progress");
+
+  desc.innerHTML = stages[index].text +
+    (stages[index].metric ? `<div class="metrics">${stages[index].metric}</div>` : "");
+
+  progress.style.width = ((index + 1) / stages.length) * 100 + "%";
+}
+</script>
 
 </body>
 </html>
