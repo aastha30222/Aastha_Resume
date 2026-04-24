@@ -35,35 +35,23 @@
       margin-bottom: 20px;
     }
 
-    .timeline {
-      position: relative;
+    .about-buttons {
       display: flex;
-      gap: 15px;
+      gap: 10px;
+      flex-wrap: wrap;
       margin-bottom: 20px;
     }
 
-    .progress-line {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      height: 4px;
-      width: 0%;
-      background: #4285f4;
-      transition: width 0.5s ease;
-      z-index: 0;
-    }
-
-    .step {
-      position: relative;
-      padding: 10px 15px;
+    .btn {
+      padding: 8px 14px;
       background: #e8f0fe;
       border-radius: 20px;
       cursor: pointer;
-      z-index: 1;
       transition: 0.3s;
+      font-size: 14px;
     }
 
-    .step:hover {
+    .btn:hover {
       background: #4285f4;
       color: white;
     }
@@ -74,12 +62,6 @@
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       animation: fadeIn 0.4s ease;
-    }
-
-    .metrics {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #4285f4;
     }
 
     @keyframes fadeIn {
@@ -102,50 +84,35 @@
     <h1>Aastha Mishra</h1>
     <p>Industrial Engineer | AI-Driven Operations</p>
 
-    <div class="timeline">
-      <div class="progress-line" id="progress"></div>
+    <h2>About Me</h2>
 
-      <div class="step" onclick="showStage(0)">🎓 Foundation</div>
-      <div class="step" onclick="showStage(1)">⚙️ Optimization</div>
-      <div class="step" onclick="showStage(2)">📈 Impact</div>
-      <div class="step" onclick="showStage(3)">🤖 Innovation</div>
+    <div class="about-buttons">
+      <div class="btn" onclick="showAbout(0)">Overview</div>
+      <div class="btn" onclick="showAbout(1)">What I Do</div>
+      <div class="btn" onclick="showAbout(2)">How I Work</div>
+      <div class="btn" onclick="showAbout(3)">Focus</div>
     </div>
 
     <div id="desc" class="description">
-      Click a stage to explore the journey.
+      Click a section to learn more.
     </div>
   </div>
 
 </div>
 
 <script>
-const stages = [
-  {
-    text: "Built a strong foundation in Industrial Engineering with a focus on process thinking, continuous improvement, and operational efficiency.",
-    metric: "Kaizen | 5S | DMAIC | Root Cause Analysis"
-  },
-  {
-    text: "Drove supply chain optimization through process improvement, resource utilization, and cross-functional collaboration.",
-    metric: "Efficiency ↑ | Waste ↓"
-  },
-  {
-    text: "Led high-impact initiatives focused on cost reduction, productivity improvement, and performance enhancement across operations.",
-    metric: "+42 cases/hour | $36K/month saved"
-  },
-  {
-    text: "Leverage data-driven strategies and AI tools to build scalable solutions, enhance decision-making, and continuously improve safety, quality, and performance.",
-    metric: "AI + Data | Continuous Innovation"
-  }
+const aboutData = [
+  "Accomplished Industrial Engineer with 5+ years of experience driving operational efficiency and optimizing supply chain processes.",
+
+  "I focus on improving processes, optimizing resources, and reducing operational costs while collaborating across teams to deliver scalable solutions.",
+
+  "My approach is rooted in continuous improvement methodologies such as Kaizen, 5S, DMAIC, and Root Cause Analysis, combined with strong data-driven decision making.",
+
+  "I leverage AI tools and emerging technologies to enhance safety, quality, and performance, with a focus on delivering meaningful and strategic business outcomes."
 ];
 
-function showStage(index) {
-  const desc = document.getElementById("desc");
-  const progress = document.getElementById("progress");
-
-  desc.innerHTML = stages[index].text +
-    (stages[index].metric ? `<div class="metrics">${stages[index].metric}</div>` : "");
-
-  progress.style.width = ((index + 1) / stages.length) * 100 + "%";
+function showAbout(index) {
+  document.getElementById("desc").innerText = aboutData[index];
 }
 </script>
 
