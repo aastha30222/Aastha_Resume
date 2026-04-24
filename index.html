@@ -7,39 +7,47 @@
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #f7f9fc;
-      padding: 40px;
+      padding: 30px;
     }
 
     .container {
-      display: flex;
-      align-items: center;
-      gap: 40px;
       max-width: 900px;
       margin: auto;
     }
 
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
     .avatar {
-      font-size: 90px;
+      font-size: 80px;
       background: white;
       padding: 20px;
       border-radius: 50%;
       box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     }
 
-    .content h1 {
+    h1 {
       margin-bottom: 5px;
     }
 
-    .content p {
+    .subtitle {
       color: #555;
-      margin-bottom: 20px;
     }
 
-    .about-buttons {
+    /* ABOUT SECTION */
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .buttons {
       display: flex;
-      gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 20px;
+      gap: 10px;
+      margin: 15px 0;
     }
 
     .btn {
@@ -56,12 +64,47 @@
       color: white;
     }
 
-    .description {
+    .box {
       background: white;
       padding: 15px;
-      border-radius: 8px;
+      border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      animation: fadeIn 0.4s ease;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* TOOLBOX */
+    .category {
+      padding: 8px 14px;
+      background: #e8f0fe;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .category:hover {
+      background: #4285f4;
+      color: white;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #f1f3f4;
+      padding: 6px 10px;
+      margin: 5px;
+      border-radius: 15px;
+      font-size: 13px;
+      transition: 0.3s;
+    }
+
+    .tag:hover {
+      background: #4285f4;
+      color: white;
+    }
+
+    .desc {
+      margin-top: 10px;
+      color: #555;
+      font-size: 14px;
     }
 
     @keyframes fadeIn {
@@ -69,32 +112,51 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-  <!-- Avatar -->
-  <div class="avatar">👩‍🎓</div>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="avatar">👩‍🎓</div>
+    <div>
+      <h1>Aastha Mishra</h1>
+      <p class="subtitle">Industrial Engineer | AI-Driven Operations</p>
+    </div>
+  </div>
 
-  <!-- Content -->
-  <div class="content">
-    <h1>Aastha Mishra</h1>
-    <p>Industrial Engineer | AI-Driven Operations</p>
-
+  <!-- ABOUT ME -->
+  <div class="section">
     <h2>About Me</h2>
 
-    <div class="about-buttons">
+    <div class="buttons">
       <div class="btn" onclick="showAbout(0)">Overview</div>
       <div class="btn" onclick="showAbout(1)">What I Do</div>
       <div class="btn" onclick="showAbout(2)">How I Work</div>
       <div class="btn" onclick="showAbout(3)">Focus</div>
     </div>
 
-    <div id="desc" class="description">
+    <div id="aboutBox" class="box">
       Click a section to learn more.
+    </div>
+  </div>
+
+  <!-- TOOLBOX -->
+  <div class="section">
+    <h2>🧰 My Toolbox</h2>
+
+    <div class="buttons">
+      <div class="category" onclick="showSkills(0)">⚙️ Process</div>
+      <div class="category" onclick="showSkills(1)">💻 Systems</div>
+      <div class="category" onclick="showSkills(2)">📊 Data</div>
+      <div class="category" onclick="showSkills(3)">🤖 AI</div>
+      <div class="category" onclick="showSkills(4)">📁 Projects</div>
+    </div>
+
+    <div id="skillsBox" class="box">
+      Click a category to explore.
     </div>
   </div>
 
@@ -103,16 +165,44 @@
 <script>
 const aboutData = [
   "Accomplished Industrial Engineer with 5+ years of experience driving operational efficiency and optimizing supply chain processes.",
-
   "I focus on improving processes, optimizing resources, and reducing operational costs while collaborating across teams to deliver scalable solutions.",
-
   "My approach is rooted in continuous improvement methodologies such as Kaizen, 5S, DMAIC, and Root Cause Analysis, combined with strong data-driven decision making.",
-
   "I leverage AI tools and emerging technologies to enhance safety, quality, and performance, with a focus on delivering meaningful and strategic business outcomes."
 ];
 
 function showAbout(index) {
-  document.getElementById("desc").innerText = aboutData[index];
+  document.getElementById("aboutBox").innerText = aboutData[index];
+}
+
+const skillData = [
+  {
+    tags: ["Time Study", "Six Sigma (White Belt)", "Kaizen", "DMAIC", "FIFO", "5S", "RCA", "VSM", "5 Whys"],
+    desc: "Focused on continuous improvement, waste elimination, and building efficient operational processes."
+  },
+  {
+    tags: ["SAP", "WMS", "TMS"],
+    desc: "Experience with enterprise systems supporting supply chain and logistics operations."
+  },
+  {
+    tags: ["Power BI", "MySQL", "Python", "Advanced Excel", "MS Access", "JMP"],
+    desc: "Using data to generate insights and support decision-making."
+  },
+  {
+    tags: ["OpenCV", "YOLOv5", "Computer Vision", "Prompt Engineering", "AI Solution Design"],
+    desc: "Building AI-driven and automation-focused solutions."
+  },
+  {
+    tags: ["Wrike", "MS Project", "Jira", "Web App Development", "Cloud Deployment"],
+    desc: "Managing projects and deploying scalable applications."
+  }
+];
+
+function showSkills(index) {
+  const box = document.getElementById("skillsBox");
+
+  box.innerHTML =
+    skillData[index].tags.map(tag => `<span class="tag">${tag}</span>`).join("") +
+    `<div class="desc">${skillData[index].desc}</div>`;
 }
 </script>
 
