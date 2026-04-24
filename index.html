@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Aastha Mishra</title>
+  <title>Aastha Mishra | Portfolio</title>
 
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #f7f9fc;
       padding: 30px;
+      margin: 0;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 950px;
       margin: auto;
     }
 
+    /* HEADER */
     .header {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 25px;
       margin-bottom: 30px;
     }
 
@@ -31,26 +33,22 @@
     }
 
     h1 {
-      margin-bottom: 5px;
+      margin: 0;
     }
 
     .subtitle {
       color: #555;
     }
 
-    /* ABOUT SECTION */
-    .section {
-      margin-bottom: 40px;
-    }
-
-    .buttons {
+    /* NAV BUTTONS */
+    .nav {
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
-      margin: 15px 0;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
     }
 
-    .btn {
+    .nav-btn {
       padding: 8px 14px;
       background: #e8f0fe;
       border-radius: 20px;
@@ -59,33 +57,22 @@
       font-size: 14px;
     }
 
-    .btn:hover {
+    .nav-btn:hover {
       background: #4285f4;
       color: white;
     }
 
+    /* CARD */
     .box {
       background: white;
-      padding: 15px;
+      padding: 18px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       animation: fadeIn 0.3s ease;
+      margin-bottom: 30px;
     }
 
-    /* TOOLBOX */
-    .category {
-      padding: 8px 14px;
-      background: #e8f0fe;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .category:hover {
-      background: #4285f4;
-      color: white;
-    }
-
+    /* TOOLBOX TAGS */
     .tag {
       display: inline-block;
       background: #f1f3f4;
@@ -101,15 +88,13 @@
       color: white;
     }
 
-    .desc {
+    ul {
       margin-top: 10px;
-      color: #555;
-      font-size: 14px;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {opacity: 0; transform: translateY(5px);}
+      to {opacity: 1; transform: translateY(0);}
     }
   </style>
 </head>
@@ -123,87 +108,116 @@
     <div class="avatar">👩‍🎓</div>
     <div>
       <h1>Aastha Mishra</h1>
-      <p class="subtitle">Industrial Engineer | AI-Driven Operations</p>
+      <p class="subtitle">Industrial Engineer | AI-Driven Operations | Systems Thinker</p>
     </div>
   </div>
 
-  <!-- ABOUT ME -->
-  <div class="section">
-    <h2>About Me</h2>
-
-    <div class="buttons">
-      <div class="btn" onclick="showAbout(0)">Overview</div>
-      <div class="btn" onclick="showAbout(1)">What I Do</div>
-      <div class="btn" onclick="showAbout(2)">How I Work</div>
-      <div class="btn" onclick="showAbout(3)">Focus</div>
-    </div>
-
-    <div id="aboutBox" class="box">
-      Click a section to learn more.
-    </div>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-btn" onclick="showSection('about')">About Me</div>
+    <div class="nav-btn" onclick="showSection('toolbox')">My Toolbox</div>
+    <div class="nav-btn" onclick="showSection('thinking')">How I Solve Problems</div>
   </div>
 
-  <!-- TOOLBOX -->
-  <div class="section">
-    <h2>🧰 My Toolbox</h2>
-
-    <div class="buttons">
-      <div class="category" onclick="showSkills(0)">⚙️ Process</div>
-      <div class="category" onclick="showSkills(1)">💻 Systems</div>
-      <div class="category" onclick="showSkills(2)">📊 Data</div>
-      <div class="category" onclick="showSkills(3)">🤖 AI</div>
-      <div class="category" onclick="showSkills(4)">📁 Projects</div>
-    </div>
-
-    <div id="skillsBox" class="box">
-      Click a category to explore.
-    </div>
-  </div>
+  <!-- CONTENT -->
+  <div id="content"></div>
 
 </div>
 
 <script>
-const aboutData = [
-  "Accomplished Industrial Engineer with 5+ years of experience driving operational efficiency and optimizing supply chain processes.",
-  "I focus on improving processes, optimizing resources, and reducing operational costs while collaborating across teams to deliver scalable solutions.",
-  "My approach is rooted in continuous improvement methodologies such as Kaizen, 5S, DMAIC, and Root Cause Analysis, combined with strong data-driven decision making.",
-  "I leverage AI tools and emerging technologies to enhance safety, quality, and performance, with a focus on delivering meaningful and strategic business outcomes."
-];
 
-function showAbout(index) {
-  document.getElementById("aboutBox").innerText = aboutData[index];
+const sections = {
+
+  about: `
+    <div class="box">
+      <h2>About Me</h2>
+      <p>
+        Accomplished Industrial Engineer with 5+ years of experience driving operational efficiency and optimizing supply chain processes.
+        I focus on process improvement, resource optimization, and cost-effective, scalable solutions.
+      </p>
+
+      <p>
+        My approach is rooted in continuous improvement methodologies such as Kaizen, 5S, DMAIC, Root Cause Analysis, and data-driven decision making.
+        I actively leverage AI tools and emerging technologies to enhance safety, quality, and performance.
+      </p>
+
+      <p>
+        This web application reflects how I work—taking an idea, structuring it into requirements, building it step-by-step, and using AI-assisted development
+        to create and refine a live, functional product.
+      </p>
+    </div>
+  `,
+
+  toolbox: `
+    <div class="box">
+      <h2>🧰 My Toolbox</h2>
+
+      <p><b>Process Improvement & Lean</b></p>
+      <span class="tag">Time Study</span>
+      <span class="tag">Six Sigma</span>
+      <span class="tag">Kaizen</span>
+      <span class="tag">DMAIC</span>
+      <span class="tag">FIFO</span>
+      <span class="tag">5S</span>
+      <span class="tag">RCA</span>
+      <span class="tag">VSM</span>
+      <span class="tag">5 Whys</span>
+
+      <p><b>Systems</b></p>
+      <span class="tag">SAP</span>
+      <span class="tag">WMS</span>
+      <span class="tag">TMS</span>
+
+      <p><b>Data & Analytics</b></p>
+      <span class="tag">Power BI</span>
+      <span class="tag">MySQL</span>
+      <span class="tag">Python</span>
+      <span class="tag">Excel</span>
+      <span class="tag">MS Access</span>
+      <span class="tag">JMP</span>
+
+      <p><b>AI & Automation</b></p>
+      <span class="tag">OpenCV</span>
+      <span class="tag">YOLOv5</span>
+      <span class="tag">Computer Vision</span>
+      <span class="tag">Prompt Engineering</span>
+      <span class="tag">AI Solution Design</span>
+      <span class="tag">Web App Development</span>
+      <span class="tag">Cloud Deployment</span>
+    </div>
+  `,
+
+  thinking: `
+    <div class="box">
+      <h2>🧠 How I Solve Problems</h2>
+
+      <p>
+        I approach every problem as an end-to-end system—from identifying the challenge to building and deploying a working solution.
+      </p>
+
+      <ul>
+        <li><b>Identify:</b> Understand operational gaps and inefficiencies</li>
+        <li><b>Structure:</b> Break down problems into measurable components</li>
+        <li><b>Design:</b> Create process or AI-driven solutions</li>
+        <li><b>Build:</b> Translate ideas into working systems or tools</li>
+        <li><b>Deploy:</b> Implement in real operational environments</li>
+        <li><b>Improve:</b> Continuously refine using feedback and data</li>
+      </ul>
+
+      <p>
+        This web application itself is an example of this approach—built iteratively using structured thinking and AI-assisted development.
+      </p>
+    </div>
+  `
+};
+
+function showSection(key) {
+  document.getElementById("content").innerHTML = sections[key];
 }
 
-const skillData = [
-  {
-    tags: ["Time Study", "Six Sigma (White Belt)", "Kaizen", "DMAIC", "FIFO", "5S", "RCA", "VSM", "5 Whys"],
-    desc: "Focused on continuous improvement, waste elimination, and building efficient operational processes."
-  },
-  {
-    tags: ["SAP", "WMS", "TMS"],
-    desc: "Experience with enterprise systems supporting supply chain and logistics operations."
-  },
-  {
-    tags: ["Power BI", "MySQL", "Python", "Advanced Excel", "MS Access", "JMP"],
-    desc: "Using data to generate insights and support decision-making."
-  },
-  {
-    tags: ["OpenCV", "YOLOv5", "Computer Vision", "Prompt Engineering", "AI Solution Design"],
-    desc: "Building AI-driven and automation-focused solutions."
-  },
-  {
-    tags: ["Wrike", "MS Project", "Jira", "Web App Development", "Cloud Deployment"],
-    desc: "Managing projects and deploying scalable applications."
-  }
-];
+// default view
+showSection('about');
 
-function showSkills(index) {
-  const box = document.getElementById("skillsBox");
-
-  box.innerHTML =
-    skillData[index].tags.map(tag => `<span class="tag">${tag}</span>`).join("") +
-    `<div class="desc">${skillData[index].desc}</div>`;
-}
 </script>
 
 </body>
